@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux"
 import { useEffect, useState } from "react";
 import { NewTeamForm } from "./NewTeamForm";
 import { ModifyTeamForm } from "./ModifyTeamForm";
+import {ModifyPlayerForm} from "./ModifyPlayerForm";
 
 
 export const Teams = ({teams}) => {
@@ -53,7 +54,7 @@ export const Teams = ({teams}) => {
 
     return(
         <>
-        <button onClick={handleClick}>Créer une équipe</button>
+        <button className="button-30" onClick={handleClick}>Créer une équipe</button>
         {
             formNew && (
                 <NewTeamForm setFormNew={setFormNew }/>
@@ -65,21 +66,29 @@ export const Teams = ({teams}) => {
             ?
 
             Object.values(teams.teams).map(team => 
-                <div key={team.name}>
+                <div className="team__container" key={team.name}>
                     <p>{team.name}</p>
                     <p>{team.color}</p>
                     {
                         Object.values(team.players).map(player =>
-                            <div key={player.id}>
-                                <p>{player.id}</p>
-                                <p>{player.firstName}</p> 
-                                <button onClick={() => handleDeletePlayer(player.id, player.team)}>X</button> 
-                            </div>  
+                            <div className="player__container" key={player.id}>
+                                <ul className="player__info__container">
+                                    {/*<li className="player__info">ID: {player.id}</li>*/}
+                                    <li className="player__info">Nom: {player.firstName}</li>
+                                    <li className="player__info">Prénom: {player.lastName}</li>
+                                    <li className="player__info">Age: {player.age}</li>
+                                    <li className="player__info">Rôle: {player.role}</li>
+                                    <li className="player__info">Équipe: {player.team}</li>
+                                </ul>
+                                <button className="button-30" onClick={() => handleDeletePlayer(player.id, player.team)}>Supprimer de l'équipe</button>
+                            </div>
                         )
                         
                     }
-                    <button onClick={() => handleDelete(team.name)}>Supprimer l'équipe</button>
-                    <button onClick={handleModify}>Modifier l'équipe</button>
+                    <div className="button__container">
+                        <button className="button-30" onClick={() => handleDelete(team.name)}>Supprimer l'équipe</button>
+                        <button className="button-30" onClick={handleModify}>Modifier l'équipe</button>
+                    </div>
                 { modifyForm && <ModifyTeamForm {...{ team, setModifyForm }}/>}
                 </div>
             )

@@ -39,14 +39,14 @@ export const ModifyPlayerForm = ({player, setModifyForm}) => {
 
             <label htmlFor={"last_name"}>Nom :</label>
             {/* @todo le setupdate à corriger */}
-            <input type="text" value={newPlayer.lastName} name="lastName" onChange={handleChange}></input>
+            <input className="input--text" type="text" value={newPlayer.lastName} name="lastName" onChange={handleChange}></input>
             <label htmlFor={"first_name"}>Prénom :</label>
-            <input type="text" value={newPlayer.firstName} name="firstName" onChange={handleChange}></input>
+            <input className="input--text" type="text" value={newPlayer.firstName} name="firstName" onChange={handleChange}></input>
             <label htmlFor={"age"}>Âge :</label>
-            <input type="number" value={newPlayer.age} name="age" min="18" max="40" onChange={handleChange}></input>
+            <input className="input--text" type="number" value={newPlayer.age} name="age" min="18" max="40" onChange={handleChange}></input>
             <label htmlFor={"role"}>Poste :</label>
-            <input type="text" value={newPlayer.role} name="role" onChange={handleChange}></input>
-            <button className={"submitButton"} type={"submit"}>Modifier le joueur</button>
+            <input className="input--text" type="text" value={newPlayer.role} name="role" onChange={handleChange}></input>
+            <button className="button-30" type={"submit"}>Modifier le joueur</button>
         </form>
     )
 }

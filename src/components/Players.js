@@ -41,27 +41,31 @@ export const Players = ({players, teams}) => {
 
     return(
         <>
-        <button onClick={handleClick}>Créer un joueur</button>
-        {
-            formNew && Object.keys(teams.teams).length > 0 && (
-                <NewPlayerForm teams={teams} players={players} setFormNew={setFormNew} />
-            )
+            <button className="button-30" onClick={handleClick}>Créer un joueur</button>
+            {
+                formNew && Object.keys(teams.teams).length > 0 && (
+                    <NewPlayerForm teams={teams} players={players} setFormNew={setFormNew} />
+                )
 
-        }
-        {
+            }
+            {
             
             Object.keys(players.players).length > 0 ? 
 
             Object.values(players.players).map(player =>
-                <div>
-                    <p>{player.id}</p>
-                    <p>{player.firstName}</p>
-                    <p>{player.lastName}</p>
-                    <p>{player.age}</p>
-                    <p>{player.role}</p>
-                    <p>{player.team}</p>
-                    <button onClick={() => handleDelete(player.id, player.team)}>Supprimer le joueur</button>
-                    <button onClick={handleModify}>Modifier le joueur</button>
+                <div className="player__container">
+                    <ul className="player__info__container">
+                        {/*<li className="player__info">ID: {player.id}</li>*/}
+                        <li className="player__info">Nom: {player.firstName}</li>
+                        <li className="player__info">Prénom: {player.lastName}</li>
+                        <li className="player__info">Age: {player.age}</li>
+                        <li className="player__info">Rôle: {player.role}</li>
+                        <li className="player__info">Équipe: {player.team}</li>
+                    </ul>
+                    <div className="button__container">
+                        <button className="button-30" onClick={() => handleDelete(player.id, player.team)}>Supprimer le joueur</button>
+                        <button className="button-30" onClick={handleModify}>Modifier le joueur</button>
+                    </div>
                     { modifyForm && <ModifyPlayerForm {...{ player, setModifyForm }}/>}
                 </div>
                 )
@@ -70,7 +74,7 @@ export const Players = ({players, teams}) => {
                 <p>pas de joueurs</p>
 
             </div>
-        }
+            }
         </>
     )
 }

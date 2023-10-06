@@ -40,14 +40,14 @@ export const NewTeamForm = ({setFormNew}) => {
 
     return(
         <>
-            <form onSubmit={handleSubmit} className={"NewPlayerForm"}>
+            <form onSubmit={handleSubmit} className="NewTeamForm">
                 <h2 className={"NewTeamForm__title"}>Formulaire de création d'équipes:</h2>
 
                 <label htmlFor={"teamName"}>Nom :</label>
-                <input type="text" value={team.name} name="name" onChange={handleChange}></input>
+                <input className="input--text" type="text" value={team.name} name="name" onChange={handleChange}></input>
                 <label htmlFor={"teamColor"}>Couleur :</label>
-                <input type="text" value={team.color} name="color" onChange={handleChange}></input>
-                <button className={"submitButton"} type={"submit"}>Créer une équipe</button>
+                <input className="input--text" type="text" value={team.color} name="color" onChange={handleChange}></input>
+                <button className="button-30" type={"submit"}>Créer une équipe</button>
             </form>
         </>
     )

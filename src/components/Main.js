@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Players } from "./Players"
 import { Teams } from "./Teams"
+import { Header } from './Header'
 import { useSelector } from "react-redux";
 
 export const Main = () => {
@@ -18,14 +19,15 @@ export const Main = () => {
 
     return(
         <>
-            <h1>appli</h1>
-
-            {
-                Object.keys(teams.teams).length > 0 && (
-                    <Players {...{ teams, players }}/>
-                )
-            }
-            <Teams teams={teams}/>
+            <Header/>
+            <div className="main__container">
+              {
+                  Object.keys(teams.teams).length > 0 && (
+                      <Players {...{ teams, players }}/>
+                  )
+              }
+              <Teams teams={teams}/>
+            </div>
         </>
     )
 }

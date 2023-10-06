@@ -28,10 +28,10 @@ export const ModifyTeamForm = ({team, setModifyForm}) => {
             <h2 className={"NewTeamForm__title"}>Formulaire de modification d'équipes:</h2>
 
             <label htmlFor={"teamName"}>Nom :</label>
-            <input type="text" value={team.name} name="name" onChange={handleChange} disabled></input>
+            <input className="input--text" type="text" value={team.name} name="name" onChange={handleChange} disabled></input>
             <label htmlFor={"teamColor"}>Couleur :</label>
-            <input type="text" value={newColor} name="color" onChange={handleChange}></input>
-            <button className={"submitButton"} type={"submit"}>Modifier l'équipe</button>
+            <input className="input--text" type="text" value={newColor} name="color" onChange={handleChange}></input>
+            <button className="button-30" type={"submit"}>Modifier l'équipe</button>
         </form>
     )
 }
