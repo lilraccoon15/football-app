@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux"
 
-export const NewPlayerForm = ({teams, setFormNew}) => {
+export const NewPlayerForm = ({teams, players, setFormNew}) => {
 
     const dispatch = useDispatch();
 
     const [player, setPlayer] = useState({
-        id : 1, 
+        id : "", 
         firstName : "",
         lastName : "",
         age : "",
@@ -14,13 +14,15 @@ export const NewPlayerForm = ({teams, setFormNew}) => {
         team : ""
     })
 
-
     const handleSubmit = (e) => {
         e.preventDefault();
+        const maxId = Math.max(...Object.keys(players.players).map(id => parseInt(id, 10)));
+        const newId = isFinite(maxId) ? maxId + 1 : 1;
+
         dispatch({
             type: "CREATE_PLAYER",
             payload : {
-                id : player.id,
+                id : newId,
                 firstName : player.firstName,
                 lastName: player.lastName,
                 age: player.age,
@@ -29,21 +31,34 @@ export const NewPlayerForm = ({teams, setFormNew}) => {
             }
         })
 
-        setPlayer(prevPlayer => ({
-            id: prevPlayer.id + 1,
+        dispatch({
+            type: "ADD_PLAYER_TEAM",
+            payload: {
+                name: player.team,
+                players: {
+                    id : newId,
+                    firstName : player.firstName,
+                    lastName: player.lastName,
+                    age: player.age,
+                    role: player.role,
+                    team: player.team
+                }
+            }
+        })
+
+        setPlayer({
+            id: "",
             firstName: "",
             lastName: "",
             age: "",
             role: "",
             team: ""
-        }));
+        });
 
         setFormNew(false)
     }
 
     const handleChange = (e) => {
-        console.log(e.target.value)
-        console.log(e.target.name)
         setPlayer({...player, [e.target.name]: e.target.value})
     }
 

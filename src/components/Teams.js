@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NewTeamForm } from "./NewTeamForm";
 import { ModifyTeamForm } from "./ModifyTeamForm";
 
@@ -8,7 +8,7 @@ export const Teams = ({teams}) => {
     
     const [formNew, setFormNew] = useState(false);
     const [modifyForm, setModifyForm] = useState(false)
-
+    
     const dispatch = useDispatch();
 
     const handleClick = () => {
@@ -27,8 +27,29 @@ export const Teams = ({teams}) => {
 
     const handleModify = () => {
         setModifyForm(true)
-        console.log(modifyForm)
     }
+
+    const handleDeletePlayer = (id, team) => {
+
+        dispatch({
+            type: "UPDATE_TEAM_PLAYERS",
+            payload : {
+                id,
+                team
+            }
+        })
+
+        dispatch({
+            type: "UPDATE_PLAYER_TEAM",
+            payload : {
+                id,
+                team
+            }
+
+        })
+
+    }
+
 
     return(
         <>
@@ -44,9 +65,19 @@ export const Teams = ({teams}) => {
             ?
 
             Object.values(teams.teams).map(team => 
-                <div>
+                <div key={team.name}>
                     <p>{team.name}</p>
                     <p>{team.color}</p>
+                    {
+                        Object.values(team.players).map(player =>
+                            <div key={player.id}>
+                                <p>{player.id}</p>
+                                <p>{player.firstName}</p> 
+                                <button onClick={() => handleDeletePlayer(player.id, player.team)}>X</button> 
+                            </div>  
+                        )
+                        
+                    }
                     <button onClick={() => handleDelete(team.name)}>Supprimer l'équipe</button>
                     <button onClick={handleModify}>Modifier l'équipe</button>
                 { modifyForm && <ModifyTeamForm {...{ team, setModifyForm }}/>}
